@@ -19,7 +19,13 @@ function love.load()
 
     math.randomseed(os.time())
 
-    smallFont = love.graphics.newFont('font.ttf', 12)
+    sounds = {
+        ['paddle_hit'] = love.audio.newSource('sounds/paddle_hit.wav', 'static'),
+        ['score'] = love.audio.newSource('sounds/score.wav', 'static'),
+        ['wall_hit'] = love.audio.newSource('sounds/wall_hit.wav', 'static')
+    }
+
+    smallFont = love.graphics.newFont('font.ttf', 8)
 
     scoreFont = love.graphics.newFont('font.ttf', 32)
 
@@ -34,8 +40,8 @@ function love.load()
     player1Score = 0
     player2Score = 0
 
-    player1 = Paddle(10, 30, 5, 30)
-    player2 = Paddle(VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 30, 5, 30)
+    player1 = Paddle(10, 30, 5, 20)
+    player2 = Paddle(VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 30, 5, 20)
     ball = Ball(VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 4, 4)
 
     gamestate = 'start'
@@ -105,15 +111,18 @@ function love.update(dt)
 
         if ball:collides(player1) or ball:collides(player2) then
             ball:collided()
+            sounds.paddle_hit:play()
         end
 
         if ball.x < 0 then
+            sounds.score:play()
             player2Score = player2Score + 1
             ball:reset()
             gamestate = 'start'
         end
 
         if ball.x + ball.width > VIRTUAL_WIDTH then
+            sounds.score:play()
             player1Score = player1Score + 1
             ball:reset()
             gamestate = 'start'

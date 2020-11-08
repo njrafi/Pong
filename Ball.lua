@@ -15,7 +15,7 @@ function Ball:collides(paddle)
     if self.x > paddle.x + paddle.width or paddle.x > self.x + self.width then
         return false
     end
-    
+
     if self.y > paddle.y + paddle.height or paddle.y > self.y + self.height then
         return false
     end
@@ -54,12 +54,14 @@ function Ball:update(dt)
     if self.y <= 0 then
         self.y = 0
         self.dy = -self.dy
+        sounds.wall_hit:play()
     end
 
     -- bottom side collision
     if self.y + self.height >= VIRTUAL_HEIGHT then
         self.y = VIRTUAL_HEIGHT - self.height
         self.dy = -self.dy
+        sounds.wall_hit:play()
     end
 end
 

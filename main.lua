@@ -9,7 +9,7 @@ VIRTUAL_HEIGHT = 243
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
-    sourceCodeProFont = love.graphics.newFont('font.ttf', 16)
+    sourceCodeProFont = love.graphics.newFont('font.ttf', 8)
 
     love.graphics.setFont(sourceCodeProFont)
 
@@ -30,5 +30,20 @@ function love.keypressed(key)
 end
 
 function love.draw()
-    love.graphics.printf("Hello Pong!", 0, WINDOW_HEIGHT / 2 - 6, WINDOW_WIDTH, 'center')
+    push:apply('start')
+
+    love.graphics.clear(40 / 255, 45 / 255, 52 / 255, 255 / 255)
+
+    -- First Paddle
+    love.graphics.rectangle('fill', 10, 30, 5, 20)
+
+    -- Second Paddle
+    love.graphics.rectangle('fill', VIRTUAL_WIDTH - 10, VIRTUAL_HEIGHT - 50, 5, 20)
+
+    -- Ball
+    love.graphics.rectangle('fill', VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 4, 4)
+
+    love.graphics.printf("Hello Pong!", 0, 20, VIRTUAL_WIDTH, 'center')
+
+    push:apply('end')
 end

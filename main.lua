@@ -72,11 +72,11 @@ function love.draw()
     ball:render()
 
     love.graphics.setFont(smallFont)
-    love.graphics.printf("Hello Pong!", 0, 20, VIRTUAL_WIDTH, 'center')
+    love.graphics.printf(" " .. tostring(gamestate), 0, 20, VIRTUAL_WIDTH, 'center')
 
     love.graphics.setFont(scoreFont)
     love.graphics.print(tostring(player1Score), VIRTUAL_WIDTH / 2 - 50, VIRTUAL_HEIGHT / 3)
-    love.graphics.print(tostring(player1Score), VIRTUAL_WIDTH / 2 + 30, VIRTUAL_HEIGHT / 3)
+    love.graphics.print(tostring(player2Score), VIRTUAL_WIDTH / 2 + 30, VIRTUAL_HEIGHT / 3)
 
     displayFPS()
 
@@ -105,6 +105,18 @@ function love.update(dt)
 
         if ball:collides(player1) or ball:collides(player2) then
             ball:collided()
+        end
+
+        if ball.x < 0 then
+            player2Score = player2Score + 1
+            ball:reset()
+            gamestate = 'start'
+        end
+
+        if ball.x + ball.width > VIRTUAL_WIDTH then
+            player1Score = player1Score + 1
+            ball:reset()
+            gamestate = 'start'
         end
 
     end

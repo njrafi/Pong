@@ -53,18 +53,22 @@ function love.draw()
     -- Ball
     love.graphics.rectangle('fill', VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 4, 4)
 
+    love.graphics.setFont(smallFont)
     love.graphics.printf("Hello Pong!", 0, 20, VIRTUAL_WIDTH, 'center')
+
+    love.graphics.setFont(scoreFont)
+    love.graphics.print(tostring(player1Score), VIRTUAL_WIDTH / 2 - 50, VIRTUAL_HEIGHT / 3)
+    love.graphics.print(tostring(player1Score), VIRTUAL_WIDTH / 2 + 30, VIRTUAL_HEIGHT / 3)
 
     push:apply('end')
 end
 
-function love.update(dt) 
+function love.update(dt)
     if love.keyboard.isDown('w') then
         player1Y = player1Y + -PADDLE_SPEED * dt
     elseif love.keyboard.isDown('s') then
         player1Y = player1Y + PADDLE_SPEED * dt
     end
-
 
     if love.keyboard.isDown('up') then
         player2Y = player2Y + -PADDLE_SPEED * dt

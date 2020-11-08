@@ -35,7 +35,7 @@ function love.load()
     ballY = VIRTUAL_HEIGHT / 2 + 2
 
     ballDx = math.random(2) == 1 and 100 or -100
-    ballDy = math.random(-50, 50)
+    ballDy = math.random(-50, 50) * 1.5
 
     gamestate = 'start'
 
@@ -61,7 +61,7 @@ function love.keypressed(key)
             ballY = VIRTUAL_HEIGHT / 2 + 2
 
             ballDx = math.random(2) == 1 and 100 or -100
-            ballDy = math.random(-50, 50)
+            ballDy = math.random(-50, 50) * 1.5
         end
     end
 end

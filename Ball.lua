@@ -49,6 +49,18 @@ end
 function Ball:update(dt)
     self.x = self.x + self.dx * dt
     self.y = self.y + self.dy * dt
+
+    -- top side collision
+    if self.y <= 0 then
+        self.y = 0
+        self.dy = -self.dy
+    end
+
+    -- bottom side collision
+    if self.y + self.height >= VIRTUAL_HEIGHT then
+        self.y = VIRTUAL_HEIGHT - self.height
+        self.dy = -self.dy
+    end
 end
 
 function Ball:render()

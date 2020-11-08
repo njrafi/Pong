@@ -15,6 +15,8 @@ PADDLE_SPEED = 200
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
+    love.window.setTitle("Pong")
+
     math.randomseed(os.time())
 
     smallFont = love.graphics.newFont('font.ttf', 12)
@@ -50,12 +52,6 @@ function love.keypressed(key)
         else
             gamestate = 'start'
 
-            player1Score = 0
-            player2Score = 0
-
-            player1Y = 30
-            player2Y = VIRTUAL_HEIGHT - 50
-
             ball:reset()
         end
     end
@@ -81,6 +77,8 @@ function love.draw()
     love.graphics.setFont(scoreFont)
     love.graphics.print(tostring(player1Score), VIRTUAL_WIDTH / 2 - 50, VIRTUAL_HEIGHT / 3)
     love.graphics.print(tostring(player1Score), VIRTUAL_WIDTH / 2 + 30, VIRTUAL_HEIGHT / 3)
+
+    displayFPS()
 
     push:apply('end')
 end
@@ -108,4 +106,10 @@ function love.update(dt)
 
     player1:update(dt)
     player2:update(dt)
+end
+
+function displayFPS()
+    love.graphics.setFont(smallFont)
+    love.graphics.setColor(0, 1, 0, 1)
+    love.graphics.print("FPS: " .. tostring(love.timer.getFPS()), 10, 10)
 end
